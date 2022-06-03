@@ -7,6 +7,7 @@ import {
 import { InteractiveSwatchSet } from "../recipe.js";
 import { Swatch } from "../swatch.js";
 import { directionByIsDark } from "../utilities/direction-by-is-dark.js";
+import { swatchAsOverlay } from "../utilities/opacity.js";
 
 /**
  * Gets an interactive set of {@link Swatch}es using contrast from the reference color, then deltas for each state.
@@ -25,6 +26,7 @@ import { directionByIsDark } from "../utilities/direction-by-is-dark.js";
  * @param hoverDelta - The hover state offset from the base color
  * @param activeDelta - The active state offset from the base color
  * @param focusDelta - The focus state offset from the base color
+ * @param asOverlay - True to return a semitransparent swatch relative to `reference`
  * @param direction - The direction the deltas move on the `palette`, defaults to {@link directionByIsDark} based on `reference`
  * @returns The interactive set of Swatches
  *
@@ -38,6 +40,7 @@ export function contrastAndDeltaSwatchSet(
     hoverDelta: number,
     activeDelta: number,
     focusDelta: number,
+    asOverlay: boolean = false,
     direction: PaletteDirection = directionByIsDark(reference)
 ): InteractiveSwatchSet {
     const dir = resolvePaletteDirection(direction);
@@ -63,9 +66,17 @@ export function contrastAndDeltaSwatchSet(
     }
 
     return {
-        rest: palette.get(restIndex),
-        hover: palette.get(hoverIndex),
-        active: palette.get(restIndex + dir * activeDelta),
-        focus: palette.get(restIndex + dir * focusDelta),
+        rest: swatchAsOverlay(palette.get(restIndex), reference, asOverlay),
+        hover: swatchAsOverlay(palette.get(hoverIndex), reference, asOverlay),
+        active: swatchAsOverlay(
+            palette.get(restIndex + dir * activeDelta),
+            reference,
+            asOverlay
+        ),
+        focus: swatchAsOverlay(
+            palette.get(restIndex + dir * focusDelta),
+            reference,
+            asOverlay
+        ),
     };
 }

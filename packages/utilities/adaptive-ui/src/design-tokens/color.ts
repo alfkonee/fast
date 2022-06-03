@@ -24,6 +24,11 @@ export const fillColor = create<Swatch>("fill-color").withDefault(
     SwatchRGB.from(parseColorHexRGB("#FFFFFF")!)
 );
 
+/** @public */
+export const neutralAsOverlay = createNonCss<boolean>("neutral-as-overlay").withDefault(
+    true
+);
+
 // Accent Fill
 
 /** @public */
@@ -256,7 +261,8 @@ export const neutralForegroundRecipe = createNonCss<InteractiveColorRecipe>(
             neutralForegroundRestDelta.getValueFor(element),
             neutralForegroundHoverDelta.getValueFor(element),
             neutralForegroundActiveDelta.getValueFor(element),
-            neutralForegroundFocusDelta.getValueFor(element)
+            neutralForegroundFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
@@ -302,7 +308,8 @@ export const neutralForegroundHintRecipe = createNonCss<ColorRecipe>(
         contrastSwatch(
             neutralPalette.getValueFor(element),
             reference || fillColor.getValueFor(element),
-            ContrastTarget.NormalText
+            ContrastTarget.NormalText,
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
@@ -346,7 +353,8 @@ export const neutralFillRecipe = createNonCss<InteractiveColorRecipe>(
             neutralFillRestDelta.getValueFor(element),
             neutralFillHoverDelta.getValueFor(element),
             neutralFillActiveDelta.getValueFor(element),
-            neutralFillFocusDelta.getValueFor(element)
+            neutralFillFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
@@ -407,7 +415,8 @@ export const neutralFillInputRecipe = createNonCss<InteractiveColorRecipe>(
             neutralFillInputRestDelta.getValueFor(element),
             neutralFillInputHoverDelta.getValueFor(element),
             neutralFillInputActiveDelta.getValueFor(element),
-            neutralFillInputFocusDelta.getValueFor(element)
+            neutralFillInputFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
@@ -474,7 +483,8 @@ export const neutralFillSecondaryRecipe = createNonCss<InteractiveColorRecipe>(
             neutralFillSecondaryRestDelta.getValueFor(element),
             neutralFillSecondaryHoverDelta.getValueFor(element),
             neutralFillSecondaryActiveDelta.getValueFor(element),
-            neutralFillSecondaryFocusDelta.getValueFor(element)
+            neutralFillSecondaryFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
@@ -543,7 +553,8 @@ export const neutralFillStealthRecipe = createNonCss<InteractiveColorRecipe>(
             neutralFillStealthRestDelta.getValueFor(element),
             neutralFillStealthHoverDelta.getValueFor(element),
             neutralFillStealthActiveDelta.getValueFor(element),
-            neutralFillStealthFocusDelta.getValueFor(element)
+            neutralFillStealthFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
@@ -618,7 +629,8 @@ export const neutralFillStrongRecipe = createNonCss<InteractiveColorRecipe>(
             neutralFillStrongRestDelta.getValueFor(element),
             neutralFillStrongHoverDelta.getValueFor(element),
             neutralFillStrongActiveDelta.getValueFor(element),
-            neutralFillStrongFocusDelta.getValueFor(element)
+            neutralFillStrongFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
@@ -687,7 +699,8 @@ export const neutralStrokeRecipe = createNonCss<InteractiveColorRecipe>(
             neutralStrokeRestDelta.getValueFor(element),
             neutralStrokeHoverDelta.getValueFor(element),
             neutralStrokeActiveDelta.getValueFor(element),
-            neutralStrokeFocusDelta.getValueFor(element)
+            neutralStrokeFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         );
     },
 });
@@ -731,14 +744,15 @@ export const neutralStrokeDividerRecipe = createNonCss<ColorRecipe>(
         deltaSwatch(
             neutralPalette.getValueFor(element),
             reference || fillColor.getValueFor(element),
-            neutralStrokeDividerRestDelta.getValueFor(element)
+            neutralStrokeDividerRestDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
 /** @public */
 export const neutralStrokeDividerRest = create<Swatch>(
     "neutral-stroke-divider-rest"
-).withDefault(element =>
+).withDefault((element: HTMLElement) =>
     neutralStrokeDividerRecipe.getValueFor(element).evaluate(element)
 );
 
@@ -775,7 +789,8 @@ export const neutralStrokeInputRecipe = createNonCss<InteractiveColorRecipe>(
             neutralStrokeInputRestDelta.getValueFor(element),
             neutralStrokeInputHoverDelta.getValueFor(element),
             neutralStrokeInputActiveDelta.getValueFor(element),
-            neutralStrokeInputFocusDelta.getValueFor(element)
+            neutralStrokeInputFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         );
     },
 });
@@ -851,7 +866,8 @@ export const neutralStrokeStrongRecipe = createNonCss<InteractiveColorRecipe>(
             neutralStrokeStrongRestDelta.getValueFor(element),
             neutralStrokeStrongHoverDelta.getValueFor(element),
             neutralStrokeStrongActiveDelta.getValueFor(element),
-            neutralStrokeStrongFocusDelta.getValueFor(element)
+            neutralStrokeStrongFocusDelta.getValueFor(element),
+            neutralAsOverlay.getValueFor(element)
         ),
 });
 
